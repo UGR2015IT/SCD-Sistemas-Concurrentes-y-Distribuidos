@@ -1,5 +1,7 @@
 ### SPANISH VERSION (ENGLISH BELOW)
--------------------------------------
+
+----------------------------------------------
+
 ## El problema de los fumadores.
 
 #### Descripción del problema.
