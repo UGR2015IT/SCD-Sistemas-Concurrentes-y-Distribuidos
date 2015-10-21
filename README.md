@@ -10,6 +10,6 @@ SCD Exam @ ETSIIT (UGR Universidad de Granada). Programmation of multithreaded a
 - Giovanni Mossa
 
 ### Prácticas
-* [Practica 1: Problema de Productor y Consumidor](prductor-consumidor)
-* [Practica 1: Problema de los 3 Fumadores](3fumadores)
+* [Practica 1: Problema de Productor y Consumidor](./productor-consumidor)
+* [Practica 1: Problema de los 3 Fumadores](./3fumadores)
 
