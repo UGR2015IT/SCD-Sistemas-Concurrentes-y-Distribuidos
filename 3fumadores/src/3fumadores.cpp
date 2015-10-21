@@ -1,8 +1,8 @@
-/* 
+/*
  * File:   main.cpp
  * Author: dave95
  *
- * Created on 14 ottobre 2015, 18.55
+ * Created on 14 october 2015, 18.55
  */
 
 #include <cstdlib>
@@ -29,8 +29,18 @@ int main() {
 }
 
 void fumar(){
-    const unsigned miliseg = 100U + (rand()%1900U);
-    usleep(1000U*miliseg);
+    //  inicializa la semilla aleatoria  (solo la primera vez)
+    static bool primera_vez = true ;
+    if ( primera_vez )
+    {   primera_vez = false ;
+        srand( time(NULL) );
+    }
+
+    // calcular un numero aleatorio de milisegundos (entre 1/10 y 2 segundos)
+    const unsigned miliseg = 100U + (rand() % 1900U) ;
+
+    // retraso bloqueado durante 'miliseg' milisegundos
+    usleep( 1000U*miliseg );
 }
 
 sem_t tomaAlgo(int randNumb){
@@ -58,3 +68,8 @@ void* procEstanq(){
 
 //ARRAY DI SEMAFORI!!!
 //Meglio passare un intero (vedi seminario) che passare un semaforo (*)
+
+// TIPOLOGIA ESAME (PURA PROGRAMMAZIONE)
+//Modifica esercizio della pratica
+//Esercizio completamente nuova
+
