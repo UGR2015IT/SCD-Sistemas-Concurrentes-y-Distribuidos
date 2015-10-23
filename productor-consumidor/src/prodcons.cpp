@@ -1,6 +1,7 @@
 #include <iostream>
 #include <pthread.h>
 #include <semaphore.h>
+#include <unistd.h>
 
 using namespace std ;
 
@@ -10,24 +11,27 @@ const unsigned
         num_items  = 40 ,
         tam_vector = 10 ;
 
-// ---------------------------------------------------------------------
+int index_producir = 0;
+int index_consumir = 0;
 
-unsigned producir_dato()
-{
+int myVector[tam_vector]={};
+
+sem_t mutex, puede_leer, puede_escribir;
+
+// ---------------------------------------------------------------------
+unsigned producir_dato() {
     static int contador = 0 ;
-    cout << "producido: " << contador << endl << flush ;
+    sleep(0.5);
+    cout << "dato producido: " << contador << endl << flush ;
     return contador++ ;
 }
 // ---------------------------------------------------------------------
-
-void consumir_dato( int dato )
-{
+void consumir_dato( int dato ) {
+    sleep(0.8);
     cout << "dato recibido: " << dato << endl ;
 }
 // ---------------------------------------------------------------------
-
-void * productor( void * )
-{
+void * productor( void * p) {
     for( unsigned i = 0 ; i < num_items ; i++ )
     {
         int dato = producir_dato() ;
@@ -35,19 +39,33 @@ void * productor( void * )
         // falta: insertar "dato" en el vector
         // ................
 
+        sem_wait(&puede_escribir);
+        sem_wait(&mutex);
+        myVector[index_producir]=dato;
+        index_producir = (index_producir+1) % tam_vector;
+        sem_post(&mutex);
+        sem_post(&puede_leer);
+
     }
     return NULL ;
 }
 // ---------------------------------------------------------------------
 
-void * consumidor( void * )
-{
+void * consumidor( void * p) {
     for( unsigned i = 0 ; i < num_items ; i++ )
     {
-        int dato ;
+        int dato;
 
-        // falta: leer "dato" desde el vector intermedio
-        // .................
+        // ===================================
+        // Added by me
+        // ===================================
+
+        sem_wait(&puede_leer);
+        sem_wait(&mutex);
+        dato = myVector[index_consumir];
+        index_consumir = (index_consumir+1)%tam_vector;
+        sem_post(&puede_escribir);
+        sem_post(&mutex);
 
         consumir_dato( dato ) ;
     }
@@ -61,24 +79,22 @@ int main()
     // falta: crear y poner en marcha las hebras, esperar que terminen
     // ....
 
-    // ==================================
-    int my_vector[tam_vector] = {};
-// ==================================
 
-    pthread_t hebra_productor[num_items], hebra_consumidor[num_items];
+    sem_init( &mutex,          0, 1 ); // semaforo para EM: inicializado a 1
+    sem_init( &puede_escribir, 0, num_items ); // inicialmente se puede escribir
+    sem_init( &puede_leer,     0, 0 ); // inicialmente no se puede leer
 
-    for (unsigned int i = 0; i < num_items; i++){
-        void* arg_ptr = (void*) i;
-        pthread_create(&hebra_productor[i], NULL, productor(), NULL);
-        pthread_create(&hebra_consumidor[i], NULL, consumidor(), NULL);
-    }
+    pthread_t hebra_productor, hebra_consumidor;
 
-    for (unsigned int i=0;i<num_items;i++){
-        pthread_join(&hebra_productor[i],NULL);
-        pthread_join(&hebra_consumidor[i],NULL);
-    }
+    pthread_create(&hebra_productor, NULL, productor, NULL);
+    pthread_create(&hebra_consumidor, NULL, consumidor, NULL);
 
-    pthread_exit (NULL);
+    pthread_join(hebra_consumidor, NULL);
+    pthread_join(hebra_productor, NULL);
+
+    sem_destroy(&mutex);
+    sem_destroy(&puede_escribir);
+    sem_destroy(&puede_leer);
 
     return 0 ;
 }
