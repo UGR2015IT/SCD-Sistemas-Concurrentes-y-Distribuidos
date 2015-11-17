@@ -152,7 +152,6 @@ class PCHoare {
 // 		Salida Ejercicio 1:		//
 // ============================================ //
 
-/*
 productor 0, produciendo 0.0
 consumidor 0, consumiendo 0.0
 productor 0, produciendo 1.0
@@ -173,6 +172,4 @@ consumidor 0, consumiendo 104.0
 consumidor 1, consumiendo 4.0
 consumidor 1, consumiendo 102.0
 consumidor 1, consumiendo 2.0
-*/
 
-// ****************************************************************************
