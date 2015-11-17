@@ -1,0 +1,17 @@
+// ============================================ //
+// 		Ejercicio 1: 			//
+// Productor-Consumidor con buffer limitado	//
+// ============================================ //
+
+El ejercicio 1 proporciona el cambio de la clase Buffer vista anteriormente en monitor de tipo Hoare.
+
+Para portar de monitores nativos de java a monitores Hoare, se realizen los siguientes cambios en la clase Buffer:
+
+- La clase Buffer es una extencion de la clase AbstractMonitor;
+- se crean las condiciones:
+    private Condition produciendo = makeCondition();
+    private Condition consumiendo = makeCondition();
+- se elimina la palabra clave "synchronized" de los métodos depositar y extraer.
+- se agregan los enter() y leave() en los métodos del monitor.
+- se va a usar "Señalar y Esperar Urgente" (if) y no "Señalar y Continuar" (bucle while) 
+- se cambian los wait() por await() y los notifyAll() por signal()
