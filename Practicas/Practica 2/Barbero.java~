@@ -1,3 +1,4 @@
+import monitor.*
 class Monitor extends AbstractMonitor {
 	// Class which incapsulate the monitor	
 	private int sharedVar;							//for example, number of readers

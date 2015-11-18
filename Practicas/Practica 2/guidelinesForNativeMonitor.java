@@ -1,3 +1,8 @@
+//====================================================//
+//  Follow this guideline to solve an exercise with   //
+//	   	JAVA NATIVE MONITORS		      //
+//====================================================//
+
 class Monitor{
 	// Class which incapsulate the monitor	
 	private int sharedVar;
@@ -12,11 +17,17 @@ class Monitor{
 	}
 
 	public synchronized int getSharedVar(){
+		while (conditionToBeChecked) wait();
+		//MUTEX Code
+		signalAll();
 		return sharedVar;
 	}
 
 	public synchronized void setSharedVar(int value){
+		while (!conditionToBeChecked) wait();
+		//MUTEX Code, for example:
 		sharedVar = value;
+		signalAll();
 	}
 }
 
