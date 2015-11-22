@@ -3,7 +3,7 @@
 //	   	  JAVA HOARE MONITORS		      //
 //====================================================//
 
-import monitor.*
+import monitor.*;
 
 class Monitor extends AbstractMonitor {
 	// Class which incapsulate the monitor	
@@ -22,7 +22,7 @@ class Monitor extends AbstractMonitor {
 		//And his code
 	}
 
-	public int getSharedVar(){
+	public int getSharedVar() throws InterruptedException {
 		// The old synchronized synthax is substituted by
 		// enter(); mutual_exclusion_code; leave();
 		enter();
@@ -33,7 +33,7 @@ class Monitor extends AbstractMonitor {
 		return value;
 	}
 
-	public void setSharedVar(int value){
+	public void setSharedVar(int value) throws InterruptedException {
 		// The old synchronized synthax is substituted by
 		// enter(); mutual_exclusion_code; leave();
 		enter();
