@@ -1,0 +1,56 @@
+###############################################################################
+#
+# SCD - Sistemas Concurrentes y Distribuidos
+# Grado en Ingeniería Informática
+#
+# 2014 - Ernesto Serrano <erseco@correo.ugr.es>
+# ---------------------------------------------
+#
+# Ejercicio 02 - Problema de los fumadores con monitores hoare
+#
+# NOTA: El código fuente está documentado
+#
+###############################################################################
+
+
+1. Descripcion de los objetos condicion usados y su proposito.
+--------------------------------------------------------------------------------
+
+Se han usado cuatro condiciones:
+
+sem_estanquero:
+	Es la condicion del estanquero.
+	Se bloquea (await) cuando se genera un nuevo ingrediente
+	Se libera (signal) caundo un fumador recoge un ingrediente
+
+sem_fumadores[]:
+	Es un array de 3 condiciones, una por cada fumador.
+	Un fumador se bloquea (await) cuando termina de fumar
+	Un fumador es liberado (signal) por el estanquero al generar su ingrediente
+
+
+2. Listado de la salida del programa.
+--------------------------------------------------------------------------------
+
+bender:Practica_02_monitores ernesto$ make ej2
+java ejercicio_02_fumadores
+Estanquero, repartiendo 1
+Fumador, fumando        1
+Estanquero, repartiendo 2
+Fumador, fumando        2
+Estanquero, repartiendo 2
+Fumador, fumando        2
+Estanquero, repartiendo 2
+Fumador, fumando        2
+Estanquero, repartiendo 0
+Fumador, fumando        0
+Estanquero, repartiendo 1
+Fumador, fumando        1
+Estanquero, repartiendo 2
+Fumador, fumando        2
+Estanquero, repartiendo 2
+Fumador, fumando        2
+Estanquero, repartiendo 0
+Fumador, fumando        0
+Estanquero, repartiendo 2
+^Cmake: *** [ej2] Error 130

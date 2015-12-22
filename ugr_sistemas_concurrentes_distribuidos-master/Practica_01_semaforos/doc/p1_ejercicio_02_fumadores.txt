@@ -1,0 +1,31 @@
+###############################################################################
+#
+# SCD - Sistemas Concurrentes y Distribuidos
+# Grado en Ingeniería Informática
+#
+# 2014 - Ernesto Serrano <erseco@correo.ugr.es>
+# ---------------------------------------------
+#
+# Ejercicio 02 - Problema de los fumadores
+#
+# NOTA: El código fuente está documentado
+#
+###############################################################################
+
+1. Semaforos necesarios para sincronizacion y para cada uno de ellos:
+    - Utilidad.
+    - Valor inicial.
+    - Hebras que hacen sem wait y sem signal sobre dicho semaforo.
+--------------------------------------------------------------------------------
+
+sem_t sem_estanquero;   // Semáforo  del estanquero (inicializado a 1)
+sem_t sem_fumador[3];   // Array de 3 semaforos para los fumadores (inicializados a 0)
+sem_t mutex1;           // Semáforo para que no se solapen los cout (Se inicializa a 1)
+
+El semáforo sem_estanquero se inicializa a 1 porque de entrada el estanquero debe
+de poder despachar un ingrediente al inicio
+
+Los 3 semaforos sem_fumador se inicializan a 0 porque hasta que no se produzca un
+ingrediente (el que les falta) no pueden empezar a fumar
+
+El semaforo mutex1 se inicializa a 1 porque de entrada se puede "pintar" un cout

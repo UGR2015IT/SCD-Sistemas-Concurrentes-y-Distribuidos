@@ -1,0 +1,42 @@
+# Compiled Object files
+*.slo
+*.lo
+*.o
+*.obj
+
+*.class
+
+# Precompiled Headers
+*.gch
+*.pch
+
+# Compiled Dynamic libraries
+*.so
+*.dylib
+*.dll
+
+# Fortran module files
+*.mod
+
+# Compiled Static libraries
+*.lai
+*.la
+*.a
+*.lib
+
+# Executables
+*.exe
+*.out
+*.app
+
+# Ficheros de Mac
+.DS_Store
+
+# otras cosas
+_Practicas_OLD/
+Examen_1/
+Examen_2/
+Portafolios/
+Practica_00_skeleton/
+
+*.pdf

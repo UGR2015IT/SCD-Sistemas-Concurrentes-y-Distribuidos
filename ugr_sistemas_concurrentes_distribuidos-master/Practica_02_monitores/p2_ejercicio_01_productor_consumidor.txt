@@ -1,0 +1,56 @@
+###############################################################################
+#
+# SCD - Sistemas Concurrentes y Distribuidos
+# Grado en Ingeniería Informática
+#
+# 2014 - Ernesto Serrano <erseco@correo.ugr.es>
+# ---------------------------------------------
+#
+# Ejercicio 01 - Problema del Productor/Consumidor con monitores hoare
+#
+# NOTA: El código fuente está documentado
+#
+###############################################################################
+
+1. Descripcion de los cambios y los objetos condicion usados y su proposito.
+--------------------------------------------------------------------------------
+
+Para portar de monitores nativos de java a monitores hoare la clase Buffer se han
+realizado los siguientes cambios::
+
+Que la clase herede de AbstractMonitor, así como los include necesarios.
+
+- Creación de las condiciones:
+    private Condition produciendo = makeCondition();
+    private Condition consumiendo = makeCondition();
+- Eliminar la palabra clave "synchronized" de los métodos depositar y extraer.
+- Agregar los enter() y leave() en los métodos del monitor.
+- Cambiar los bucles while por if, ya que ahora se va a usar Señalar y Espera Urgente
+- Cambiar wait() por await() y notifyAll() por signal()
+
+2. Incluye un listado de la salida del programa (para 2 productores, 2 consumido-
+res, un buffer de tamano 3 y 5 iteraciones por hebra.
+--------------------------------------------------------------------------------
+
+bender:Practica_02_monitores ernesto$ make ej1
+java ejercicio_01_productor_consumidor 2 2 3 5 5
+productor 0, produciendo 0.0
+consumidor 0, consumiendo 0.0
+productor 0, produciendo 1.0
+productor 1, produciendo 100.0
+consumidor 1, consumiendo 1.0
+consumidor 0, consumiendo 100.0
+productor 1, produciendo 101.0
+productor 0, produciendo 2.0
+consumidor 1, consumiendo 101.0
+consumidor 0, consumiendo 2.0
+productor 0, produciendo 3.0
+productor 1, produciendo 102.0
+consumidor 1, consumiendo 3.0
+productor 0, produciendo 4.0
+consumidor 0, consumiendo 102.0
+consumidor 1, consumiendo 4.0
+productor 1, produciendo 103.0
+productor 1, produciendo 104.0
+consumidor 0, consumiendo 103.0
+consumidor 1, consumiendo 104.0

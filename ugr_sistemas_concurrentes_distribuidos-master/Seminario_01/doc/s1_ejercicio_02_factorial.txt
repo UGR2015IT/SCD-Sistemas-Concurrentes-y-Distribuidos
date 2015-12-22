@@ -1,0 +1,20 @@
+###############################################################################
+#
+# SCD - Sistemas Concurrentes y Distribuidos
+# Grado en Ingeniería Informática
+#
+# 2014 - Ernesto Serrano <erseco@correo.ugr.es>
+# ---------------------------------------------
+#
+# Ejercicio 02 - Calcular el factorial de PI de forma concurrente
+#
+# NOTA: El código fuente está documentado
+#
+###############################################################################
+
+
+Se debe razonar acerca de como el numero de procesadores disponibles y el numero
+de hebras afecta al tiempo del calculo concurrente en relacion al secuencial
+(en Linux, para conocer el numero de CPUs disponibles y sus caracterısticas, se
+puede ver el archivo /proc/cpuinfo)
+

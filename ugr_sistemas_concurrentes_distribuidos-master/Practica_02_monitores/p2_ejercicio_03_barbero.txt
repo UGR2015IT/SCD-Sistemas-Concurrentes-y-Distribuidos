@@ -1,0 +1,63 @@
+###############################################################################
+#
+# SCD - Sistemas Concurrentes y Distribuidos
+# Grado en Ingeniería Informática
+#
+# 2014 - Ernesto Serrano <erseco@correo.ugr.es>
+# ---------------------------------------------
+#
+# Ejercicio 03 - Problema del barbero con monitores hoare
+#
+# NOTA: El código fuente está documentado
+#
+###############################################################################
+
+1. Descripcion de los objetos condicion usados y su proposito.
+--------------------------------------------------------------------------------
+
+Se han usado tres condiciones:
+
+sala_espera:
+	Indica la cola de clientes en la sala de espera.
+	Cuando se entra en cortarPelo(), si la silla esta ocupada se bloquea (await).
+	De esta manera, el cliente pasa a la cola de la sala de espera.
+	Se libera (signal) al pedir otro cliente en el método siguienteCliente().
+
+silla:
+	Indica que un cliente está sentado en la silla.
+	Se bloquea (await) cuando se llama al método cortarPelo().
+	Se libera (signal) cuando el barbero termina de cortarle el pelo en finCliente().
+
+barbero:
+	Indica el barbero que está esperando clientes.
+	Se duerme (await) si la sala de espera está vacía y no hay ningun cliente en la sila.
+	Se despierta (signal) cuando un cliente se sienta en la silla.
+
+2. Listado de la salida del programa.
+--------------------------------------------------------------------------------
+
+bender:Practica_02_monitores ernesto$ make ej3
+javac -g ContadorDias.java ejercicio_01_productor_consumidor.java ejercicio_02_fumadores.java ejercicio_03_barbero.java lect_esc.java prodconsum.java
+java ejercicio_03_barbero
+Cliente empieza a afeitarse
+Barbero coge otro cliente
+Silla ocupada
+Silla ocupada
+Silla ocupada
+Silla ocupada
+Barbero termina de afeitar
+Barbero coge otro cliente
+Cliente empieza a afeitarse
+Silla ocupada
+Barbero termina de afeitar
+Barbero coge otro cliente
+Cliente empieza a afeitarse
+Barbero termina de afeitar
+Barbero coge otro cliente
+Cliente empieza a afeitarse
+Silla ocupada
+Silla ocupada
+Barbero termina de afeitar
+Barbero coge otro cliente
+Cliente empieza a afeitarse
+^Cmake: *** [ej3] Error 130

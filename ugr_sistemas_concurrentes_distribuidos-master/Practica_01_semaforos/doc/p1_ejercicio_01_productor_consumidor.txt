@@ -1,0 +1,43 @@
+###############################################################################
+#
+# SCD - Sistemas Concurrentes y Distribuidos
+# Grado en Ingeniería Informática
+#
+# 2014 - Ernesto Serrano <erseco@correo.ugr.es>
+# ---------------------------------------------
+#
+# Ejercicio 01 - Problema del Productor/Consumidor
+#
+# NOTA: El código fuente está documentado
+#
+###############################################################################
+
+1. Describe la variable o variables necesarias, y como se determina en que posi-
+cion se puede escribir y en que posicion se puede leer.
+--------------------------------------------------------------------------------
+
+const int num_items = 100; 	// Valor constante entre 50 y 100
+const int tam_vec = 20; 	// Valor constante entre 10 y 20 (debe ser menor que num_items)
+
+int buffer[tam_vec]; 		// Buffer donde almacenamos los datos producidos
+int indice = 0; 			// Indice del buffer donde se ha almacenado el dato producido
+
+El indice determina en que posicion del buffer se puede escribir, se va
+incrementando cuando se produce un dato y se decrementa cuando se consume
+
+
+2. Describe los semaforos necesarios, la utilidad de los mismos, el valor ini-
+cial y en que puntos del programa se debe usar sem wait y sem signal sobre ellos.
+--------------------------------------------------------------------------------
+
+sem_t puede_producir; // Semáforo que controla al productor (se inicializa a 1)
+sem_t puede_consumir; // Semáforo que controla al consumidor (se inicializa a 0)
+sem_t mutex1; 		  // Semáforo para que no se solapen los cout (Se inicializa a 1)
+
+El semáforo puede_producir se inicializa a 1 porque de entrada el productor debe
+de poder producir
+
+El semaforo puede_consumir se inicializa a 0 porque hasta que no se produzca un
+dato no se puede consumir
+
+El semaforo mutex1 se inicializa a 1 porque de entrada se puede "pintar" un cout
