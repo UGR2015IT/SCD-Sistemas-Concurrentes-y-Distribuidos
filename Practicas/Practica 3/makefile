@@ -1,5 +1,5 @@
 .SUFFIXES:
-.PHONY:    pc,pc2,f,clean
+.PHONY:    pc,pc2,f,clean,pcfinal
 
 compilador := mpicxx
 flagsc     := -g -Wall 
@@ -13,8 +13,11 @@ pc2: prodcons2
 f: filosofos
 	mpirun -np 10 ./filosofos
 
+pcfinal: prodcons_final
+	mpirun -np 10 ./prodcons_final
+
 %: %.cpp
 	$(compilador) $(flagsc) -o $@ $<
 
 clean:
-	rm -f prodcons prodcons2 filosofos
+	rm -f prodcons prodcons2 filosofos prodcons_final
