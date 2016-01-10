@@ -76,8 +76,8 @@ void Filosofo(int id, int nprocesos) {
 		// Suelta el tenedor izquierdo
 		MPI_Ssend(NULL,0,MPI_INT,izq,SOLTAR,MPI_COMM_WORLD);
 		cout <<"Filosofo "<<id<< " suelta tenedor izq ..." << izq << endl << flush;
-		MPI_Ssend(NULL,0,MPI_INT,der,SOLTAR,MPI_COMM_WORLD);
 		// Suelta el tenedor derecho
+		MPI_Ssend(NULL,0,MPI_INT,der,SOLTAR,MPI_COMM_WORLD);
 		cout <<"Filosofo "<<id<< " suelta tenedor der ..." << der << endl << flush;      
 		// Piensa (espera bloqueada aleatorio del proceso)
 		cout << "Filosofo " << id << " PENSANDO" << endl << flush;
